@@ -70,4 +70,8 @@ class ExceptionNotificationTest < ActiveSupport::TestCase
   test "should have smtp_settings nil by default" do
     assert ExceptionNotifier::Notifier.default_options[:smtp_settings] == nil
   end
+
+  test "should have rescue_rake_exceptions true by default" do
+    assert ExceptionNotifier::Notifier.default_options[:rescue_rake_exceptions] == true
+  end
 end

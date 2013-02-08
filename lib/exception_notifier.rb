@@ -1,6 +1,7 @@
 require 'action_dispatch'
 require 'exception_notifier/notifier'
 require 'exception_notifier/campfire_notifier'
+require 'exception_notifier/rake_handler'
 
 class ExceptionNotifier
 
@@ -19,16 +20,17 @@ class ExceptionNotifier
   def initialize(app, options = {})
     @app, @options = app, options
 
-    Notifier.default_sender_address       = @options[:sender_address]
-    Notifier.default_exception_recipients = @options[:exception_recipients]
-    Notifier.default_email_prefix         = @options[:email_prefix]
-    Notifier.default_email_format         = @options[:email_format]
-    Notifier.default_sections             = @options[:sections]
-    Notifier.default_background_sections  = @options[:background_sections]
-    Notifier.default_verbose_subject      = @options[:verbose_subject]
-    Notifier.default_normalize_subject    = @options[:normalize_subject]
-    Notifier.default_smtp_settings        = @options[:smtp_settings]
-    Notifier.default_email_headers        = @options[:email_headers]
+    Notifier.default_sender_address         = @options[:sender_address]
+    Notifier.default_exception_recipients   = @options[:exception_recipients]
+    Notifier.default_email_prefix           = @options[:email_prefix]
+    Notifier.default_email_format           = @options[:email_format]
+    Notifier.default_sections               = @options[:sections]
+    Notifier.default_background_sections    = @options[:background_sections]
+    Notifier.default_verbose_subject        = @options[:verbose_subject]
+    Notifier.default_normalize_subject      = @options[:normalize_subject]
+    Notifier.default_smtp_settings          = @options[:smtp_settings]
+    Notifier.default_email_headers          = @options[:email_headers]
+    Notifier.default_rescue_rake_exceptions = @options[:rescue_rake_exceptions]
 
     @campfire = CampfireNotifier.new @options[:campfire]
 

@@ -19,6 +19,7 @@ class ExceptionNotifier
       attr_writer :default_normalize_subject
       attr_writer :default_smtp_settings
       attr_writer :default_email_headers
+      attr_writer :default_rescue_rake_exceptions
 
       def default_sender_address
         @default_sender_address || %("Exception Notifier" <exception.notifier@default.com>)
@@ -60,6 +61,10 @@ class ExceptionNotifier
         @default_email_headers || {}
       end
 
+      def default_rescue_rake_exceptions
+        @default_rescue_rake_exceptions != false
+      end
+
       def default_options
         { :sender_address => default_sender_address,
           :exception_recipients => default_exception_recipients,
@@ -71,7 +76,8 @@ class ExceptionNotifier
           :normalize_subject => default_normalize_subject,
           :template_path => mailer_name,
           :smtp_settings => default_smtp_settings,
-          :email_headers => default_email_headers }
+          :email_headers => default_email_headers,
+          :rescue_rake_exceptions => default_rescue_rake_exceptions }
       end
 
       def normalize_digits(string)
